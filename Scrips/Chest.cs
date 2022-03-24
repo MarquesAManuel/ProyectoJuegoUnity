@@ -5,7 +5,7 @@ using UnityEngine;
 public class Chest : Collectables
 {
     public Sprite cofreBitcoins;
-    public int bitcoinAmounts = 5;
+    public int bitcoinAmount = 5;
 
 
     protected override void OnCollect()
@@ -14,7 +14,7 @@ public class Chest : Collectables
         {
             collected = true;
             GetComponent<SpriteRenderer>().sprite = cofreBitcoins;
-            Debug.Log("Dar " + bitcoinAmounts + " bitcoins!");
+            GameManager.instance.ShowText("+" + bitcoinAmount + " bitcoins", 25, Color.yellow, transform.position, Vector3.up * 50, 3.0f);
 
         }
         

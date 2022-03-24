@@ -136,5 +136,5 @@ MonoBehaviour:
     maxDepth: 0
     minNormalAngle: 0
     maxNormalAngle: 0
-  cofreBitcoins: {fileID: -391501983766612251, guid: 589459438eaf3314c8d00a4ad3e8d3ae, type: 3}
-  bitcoinAmounts: 5
+  cofreBitcoins: {fileID: 1985113075199666752, guid: 589459438eaf3314c8d00a4ad3e8d3ae, type: 3}
+  bitcoinAmount: 5
