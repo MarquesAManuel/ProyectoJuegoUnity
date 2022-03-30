@@ -14,6 +14,7 @@ public class Chest : Collectables
         {
             collected = true;
             GetComponent<SpriteRenderer>().sprite = cofreBitcoins;
+            GameManager.instance.bitcoin += bitcoinAmount;
             GameManager.instance.ShowText("+" + bitcoinAmount + " bitcoins", 20, Color.yellow, transform.position, Vector3.up * 50, 1.0f);
 
         }

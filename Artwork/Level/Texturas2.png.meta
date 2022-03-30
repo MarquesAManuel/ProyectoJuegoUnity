@@ -188,6 +188,15 @@ TextureImporter:
   - first:
       213: 8033163947180481322
     second: slimeb_0
+  - first:
+      213: -6828272266684375072
+    second: caballeroboludo_1
+  - first:
+      213: -2885735660045134898
+    second: caballeroboludo_2
+  - first:
+      213: 778808685990930713
+    second: caballeroboludo_4
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -1629,7 +1638,7 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1637,6 +1646,69 @@ TextureImporter:
       bones: []
       spriteID: a2bda266c088b7f60800000000000000
       internalID: 8033163947180481322
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: caballeroboludo_1
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 0
+        width: 15
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0ef50aa1d8a1d31a0800000000000000
+      internalID: -6828272266684375072
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: caballeroboludo_2
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 0
+        width: 15
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ec3155bd4bec3f7d0800000000000000
+      internalID: -2885735660045134898
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: caballeroboludo_4
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 0
+        width: 15
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9196a74af52eeca00800000000000000
+      internalID: 778808685990930713
       vertices: []
       indices: 
       edges: []

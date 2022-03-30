@@ -4,6 +4,23 @@ using UnityEngine;
 
 public class Player : Mover
 {
+    public static Player instance;
+
+    
+    private void Awake()
+    {
+        if (Player.instance == null)
+        {
+            Player.instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+
+    }
+    
     private void FixedUpdate()
     {
 

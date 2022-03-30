@@ -5,8 +5,23 @@ using UnityEngine;
 public class cameraControll : MonoBehaviour
 {
     public Transform lookAt;
+    public static cameraControll instance;
     public float boundX = 0.15f;
     public float boundY = 0.05f;
+
+    private void Awake()
+    {
+        if (cameraControll.instance == null)
+        {
+            cameraControll.instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+            
+    }
 
     private void LateUpdate()
     {

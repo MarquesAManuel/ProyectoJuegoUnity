@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour
     //Referencias
 
     public Player player;
-    //public Weapon weapon;
+    public Weapon weapon;
     public TextManager textManager;
 
     //Logica
@@ -39,6 +39,25 @@ public class GameManager : MonoBehaviour
     public void ShowText(string msg, int fontSize, Color color, Vector3 position, Vector3 motion, float duration)
     {
         textManager.Show(msg, fontSize, color, position, motion, duration);
+    }
+
+    //Upgrade weapon
+    public bool TryUpgradeWeapon()
+    {
+        //Is the weapon at max lvl?
+        if (weaponPrices.Count <= weapon.weaponLvl)
+        {
+            return false;
+        }
+
+        if (bitcoin >= weaponPrices[weapon.weaponLvl])
+        {
+            bitcoin -= weaponPrices[weapon.weaponLvl];
+            weapon.upgradeWeapon();
+            return true;
+        }
+
+        return false;
     }
     
     
@@ -58,7 +77,7 @@ public class GameManager : MonoBehaviour
         s += "0" + "|";
         s += bitcoin.ToString() + "|";
         s += exp.ToString() + "|";
-        s += "0"; 
+        s += weapon.weaponLvl.ToString(); 
 
         PlayerPrefs.SetString("SaveState", s);
     }
@@ -73,7 +92,7 @@ public class GameManager : MonoBehaviour
         //Change player skin
         bitcoin = int.Parse(data[1]);
         exp = int.Parse(data[2]);
-        //Change weapon lvl
+        weapon.setWeaponLvl(int.Parse(data[3]));
 
         Debug.Log("LoadState");
     }
