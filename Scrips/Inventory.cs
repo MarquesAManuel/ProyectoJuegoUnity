@@ -47,6 +47,7 @@ public class Inventory : MonoBehaviour
     private void onSelectionChange()
     {
         characterSelectionSprite.sprite = GameManager.instance.playerSprites[currentCharacterSelection];
+        GameManager.instance.player.SwapSprite(currentCharacterSelection);
     }
 
     // Weapon Upgrade
@@ -73,14 +74,29 @@ public class Inventory : MonoBehaviour
 
 
         //Meta
-        levelText.text = "NOT IMPLEMENTED YET";
+        levelText.text = GameManager.instance.GetCurrentLvl().ToString();
         hitpointText.text = GameManager.instance.player.hitpoints.ToString();
         bitcoinText.text = GameManager.instance.bitcoin.ToString();
 
         //XP bar
-        xpText.text = "NOT IMPLEMENTED YET";
-        xpBar.localScale = new Vector3(0.5f, 0, 0);
+        int currentLvlXp = GameManager.instance.GetCurrentLvl();
+        if (currentLvlXp == GameManager.instance.expTable.Count)
+        {
+            xpText.text = GameManager.instance.exp.ToString() + " total experience points";
+            xpBar.localScale = Vector3.one;
+        }
+        else
+        {
+            int prevLvlXp = GameManager.instance.GetXpToLvl(currentLvlXp - 1);
+            currentLvlXp = GameManager.instance.GetXpToLvl(currentLvlXp);
 
+            int diff = currentLvlXp - prevLvlXp;
+            int currentXpIntoLvl = GameManager.instance.exp - prevLvlXp;
+
+            float completionRatio = (float)currentXpIntoLvl / (float)diff;
+            xpBar.localScale = new Vector3(completionRatio, 1, 1);
+            xpText.text = currentXpIntoLvl.ToString() + " / " + diff;
+        }
 
     }
 }

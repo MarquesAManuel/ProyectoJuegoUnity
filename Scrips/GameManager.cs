@@ -14,6 +14,9 @@ public class GameManager : MonoBehaviour
             return;
         }
 
+        //Limpiar info del jugador para empezar de 0
+        //PlayerPrefs.DeleteAll(); 
+
         instance = this;
         SceneManager.sceneLoaded += LoadState;
         DontDestroyOnLoad(gameObject);
@@ -59,8 +62,58 @@ public class GameManager : MonoBehaviour
 
         return false;
     }
-    
-    
+
+    //Experience system
+    public int GetCurrentLvl()
+    {
+        int r = 0;
+        int add = 0;
+
+        while (exp >= add)
+        {
+            add += expTable[r];
+            r++;
+
+            if (r == expTable.Count) //Check if max lvl
+            {
+                return r;
+            }
+        }
+
+        return r;
+    }
+
+    public int GetXpToLvl(int lvl)
+    {
+        int r = 0;
+        int xp = 0;
+
+        while (r < lvl)
+        {
+            xp += expTable[r];
+            r++;
+        }
+
+        return xp;
+    }
+
+    public void GrantXP(int xp)
+    {
+        int currLevel = GetCurrentLvl();
+        exp += xp;
+        if (currLevel < GetCurrentLvl())
+        {
+            OnLvlUp();
+        }
+    }
+
+    public void OnLvlUp()
+    {
+        Debug.Log("Level UP!");
+        player.OnLvlUp();
+    }
+
+
     /*Save state
     *
     * INT prefSkin
@@ -92,6 +145,10 @@ public class GameManager : MonoBehaviour
         //Change player skin
         bitcoin = int.Parse(data[1]);
         exp = int.Parse(data[2]);
+        if (GetCurrentLvl() != 1)
+        {
+          player.SetLvl(GetCurrentLvl());
+        }
         weapon.setWeaponLvl(int.Parse(data[3]));
 
         Debug.Log("LoadState");

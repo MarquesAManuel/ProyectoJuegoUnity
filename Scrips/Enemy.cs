@@ -20,12 +20,18 @@ public class Enemy : Mover
     private BoxCollider2D hitbox;
     private Collider2D[] hits = new Collider2D[10];
 
+    //Enemy atack
+    private Animator anim;
+    private float cooldown = 0.7f;
+    private float lastAtack;
+
     protected override void Start()
     {
         base.Start();
         playerTransform = GameManager.instance.player.transform;
         startingPosition = transform.position;
         hitbox = transform.GetChild(0).GetComponent<BoxCollider2D>();
+        anim = GetComponent<Animator>();
     }
 
     private void FixedUpdate()
@@ -35,23 +41,30 @@ public class Enemy : Mover
         {
             if (chasing = Vector3.Distance(playerTransform.position, startingPosition) < triggerLenght)
                 chasing = true;
-            
+
             if (chasing)
             {
                 if (!collidingWithPlayer)
                 {
                     UpdateMotor((playerTransform.position - transform.position).normalized);
+                    if (Time.time - lastAtack > cooldown)
+                    {
+                        lastAtack = Time.time;
+                        Atack();
+                    }
                 }
             }
             else
             {
                 UpdateMotor(startingPosition - transform.position);
+                anim.SetBool("Atack", false);
             }
         }
         else
         {
             UpdateMotor(startingPosition - transform.position);
             chasing = false;
+            anim.SetBool("Atack", false);
         }
         //UpdateMotor(Vector3.zero);
 
@@ -73,6 +86,11 @@ public class Enemy : Mover
             //Limpiamos el array
             hits[i] = null;
         }
+    }
+
+    private void Atack()
+    {
+        anim.SetTrigger("Atack");
     }
 
     protected override void Death()

@@ -5,8 +5,15 @@ using UnityEngine;
 public class Player : Mover
 {
     public static Player instance;
+    private SpriteRenderer spriteRenderer;
 
-    
+    protected override void Start()
+    {
+        base.Start();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+    }
+
+
     private void Awake()
     {
         if (Player.instance == null)
@@ -28,5 +35,24 @@ public class Player : Mover
         float y = Input.GetAxisRaw("Vertical");
 
         UpdateMotor(new Vector3(x, y, 0));
+    }
+
+    public void SwapSprite(int skinId)
+    {
+        spriteRenderer.sprite = GameManager.instance.playerSprites[skinId];
+    }
+
+    public void OnLvlUp()
+    {
+        maxHitpoitns++;
+        hitpoints = maxHitpoitns;
+    }
+
+    public void SetLvl(int level)
+    {
+        for (int i = 0; i < level; i++)
+        {
+            OnLvlUp();
+        }
     }
 }
